@@ -1,0 +1,117 @@
+
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.12/cartodb.js"></script>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.12/themes/css/cartodb.css"/>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+  <style>
+
+
+  </style>
+
+  <script>
+  var map;
+  function init(){
+    // initiate leaflet mapd
+    map = new L.Map('map', { 
+      center: [20,-20],
+      zoom: 3
+    })
+
+
+    /*L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', 
+      */
+      L.tileLayer('http://c.tiles.mapbox.com/v3/examples.map-szwdot65/{z}/{x}/{y}.png',{
+        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      }).addTo(map);
+
+      var layerUrl = 'https://levy.cartodb.com/api/v2/viz/e30443f4-c844-11e5-9e7e-0ecd1babdde5/viz.json';
+
+      var sublayers = [];
+
+      cartodb.createLayer(map, layerUrl)
+      .addTo(map)
+      .on('done', function(layer) {
+    
+    // change the query for the first layer
+    var subLayerOptions = {
+      sql: "SELECT * FROM waterfalls_tallest",  
+    }
+
+    var sublayer = layer.getSubLayer(0);
+    sublayer.set(subLayerOptions);
+    sublayers.push(sublayer);
+    detectUserLocation();
+
+
+
+
+
+  }).on('error', function() {
+      //log the error
+    });
+
+  function updateQuery() {
+    sublayers[0].set({
+      sql: "WITH waterfalls AS (SELECT cartodb_id, the_geom, the_geom_webmercator, name FROM waterfalls_tallest ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+lon+","+lat+"),4326) ASC LIMIT "+total+") SELECT null as cartodb_id, ST_MakeLine(ST_Transform(ST_SetSRID(ST_MakePoint("+lon+","+lat+"),4326),3857),the_geom_webmercator) as the_geom_webmercator, null as name FROM waterfalls UNION ALL SELECT cartodb_id, the_geom_webmercator, name FROM waterfalls",
+      cartocss: "#waterfalls_tallest{[mapnik-geometry-type = 1]{text-name: [name]; text-face-name: 'DejaVu Sans Book'; text-size: 12; text-fill: #2E5387; text-allow-overlap: false; text-halo-fill: #FFF; text-halo-radius: 2;} [mapnik-geometry-type = 2]{line-color: red; line-opacity: 0.5;} } "
+    });
+  }
+
+  var LayerActions = {
+    tallest: function(){
+      sublayers[0].setSQL("SELECT * FROM waterfalls_tallest");
+      sublayers[0].setCartoCSS("#waterfalls_tallest{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.51;marker-line-opacity: 0.6; marker-placement: point;marker-type: ellipse;marker-width: 10;marker-fill: #2E5387;marker-allow-overlap: true;}");
+      return true;
+    },
+    favorite: function(){
+      sublayers[0].setSQL("SELECT * FROM waterfalls_tallest WHERE tessellate = '1'");
+      sublayers[0].setCartoCSS("#waterfalls_tallest{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.51;marker-line-opacity: 0.6; marker-placement: point;marker-type: ellipse;marker-width: 10;marker-fill: #2E5387;marker-allow-overlap: true;}");
+      return true;
+    },
+    nearest: function(){
+      return true;
+    }
+  }
+  $('.button').click(function() {
+    $('.button').removeClass('selected');
+    $(this).addClass('selected');
+    LayerActions[$(this).attr('id')]();
+    if ( this.innerHTML=='NEAREST 100' )
+    {
+
+      updateQuery();
+
+    }
+  });
+}
+</script>
+</head>
+
+<body onload="init()">
+  <div id='map'></div>
+  <div id='menu'>
+    <a href="#nearest" id="nearest" class="button nearest">NEAREST 100</a> 
+    <a href="#favorite" id="favorite" class="button favorite">SELECTED</a> 
+    <a href="#tallest" id="tallest" class="button tallest">TALLEST</a>
+  </div>
+
+  <a href="javascript:toggleDiv('popular');" style=""><div class="close"><p>Selected Waterfalls from Around the World</p></div></a>
+  <div id = 'popular'>
+   <div class="image-wrapper">
+    <img src="#" alt="fall">
+    <div class="change-image-wrapper"><button class ="change-image">Change Image</button></div>
+    <p><span class="title"></span><br></p>
+     <div class="about">Waterfalls are some of the most wondrous natural features on our planet. This interactive map allows you to explore some of the tallest, most brilliant of them all. You can even find the 100 waterfalls closest to you! <br><br><p style="font-size:12px;">Data provided by the World Waterfall Database. Map by <a href="http://www.jlcartography.com">jlcartography.com</a></p></div>
+  </div>
+ 
+  <script src="script.js"></script>
+</div>
+</body>
+</html>

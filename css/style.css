@@ -1,0 +1,131 @@
+ html, body {width:100%; height:100%; padding: 0; margin: 0; font-family: 'oswald'; color:#555; background: #ffffff;line-height: 1.2;
+
+}
+ #map { width: 100%; height:100%; background: black;}
+ #menu { position: absolute; top: 5px; right: 500px; width: 400px; height:60px; background: transparent; z-index:10;}
+ #menu a { 
+  margin: 15px 10px 0 0;
+  float: right;
+  vertical-align: baseline;
+  width: 70px;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: normal;
+  font-family: 'oswald';
+  color: #555;
+  border-radius: 4px;
+  border: 1px solid #777777;
+  background: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#menu a.selected,
+#menu a:hover { 
+  color: #F84F40;
+}
+
+
+/* Popular Falls */
+
+#popular {
+  position: absolute;
+  top: 60px;
+  width: 480px;
+  right: 0px;
+  background: #fff;
+  padding: 0 0px;
+  height: 460px;
+  opacity: 0.95;
+}
+
+
+
+.title {
+  float:right;
+  overflow: hidden; 
+  height: 40px;
+  padding-right: 15px;
+  padding-top:  10px;
+}
+.title h3 {
+  float:right;
+  overflow: hidden; 
+  height: 40px;
+  padding-right: 15px;
+  padding-top:  10px;
+  font-weight: 200;
+  font-size: 10px;
+}
+
+.about {
+  position: absolute;
+  padding-top: 5px;
+  top: 350px;
+  left:10px;
+  height: 50px;
+  font-family: 'oswald', sans-serif;;
+  font-weight: 200;
+  width: 400px;
+  color:black;
+}
+
+.close {
+  text-decoration: none;
+  position: absolute;
+  top: 20px;
+  height: 40px;
+  width: 480px;
+  right: 0px;
+
+  padding: 0 0px;
+  opacity: 0.9;
+  line-height: normal;
+  color: #555;
+  background: #fff;
+}
+
+.close p {
+  position:absolute;
+  left: 10px;
+  bottom: 10px;
+  font-weight: bold;
+}
+
+.image-wrapper{
+  max-width:  480px;
+  width: : 100%;
+  max-height: 270px;
+  float: right;
+  top: 5px;
+
+}
+
+.image-wrapper img {
+  max-width:  480px;
+  width: : 100%;
+}
+
+.button{
+  font-family: 'oswald', sans-serif; 
+  color:#555
+}
+
+.change-image-wrapper{
+  float:left;
+  top: 10px; 
+  height: 40px;
+  background-color: blue;
+}
+
+.change-image {
+  position: absolute;
+  top: 280px;
+  padding-left: 5px;
+  left:10px;
+}
+
+
+
