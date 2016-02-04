@@ -1,9 +1,5 @@
-
-
-
-
-//array with name images
-var imageNames = ['5cOpQ79Hoq87u.gif', 'Vx5yMxhj8dLEs.gif',  'cSnSY0630kG3u.gif', 'l0NwGT5PDAv9WVDNe.gif', 'yAVZ2cWs7uVDG.gif', 'ABwlEB8x8ieHe.gif', 'ucEDsP4BX5rK8.gif', 'QXgJel0GTo5oI.gif'];
+//array with images
+var imageNames = ['Vx5yMxhj8dLEs.gif','5cOpQ79Hoq87u.gif', 'cSnSY0630kG3u.gif', 'l0NwGT5PDAv9WVDNe.gif', 'yAVZ2cWs7uVDG.gif', 'ABwlEB8x8ieHe.gif', 'ucEDsP4BX5rK8.gif', 'QXgJel0GTo5oI.gif'];
 
 var imageIndex = 0;
 //ON LOAD give image proper source
@@ -22,7 +18,7 @@ function changeImage() {
 	}
 }
 
-var titleNames = ['LANGFOSSEN - Langfoss, Norway', 'YOSEMITE FALLS - California, USA', 'SUTHERLAND FALLS - New Zealand ','VIRGINIA FALLS - Northern Territories, Canada', 'GULLFOSSEN - Gullfoss, Iceland', 'VICTORIA FALLS - Zimbabwe & Zambia', 'KEREPAKUPAI MERU - Venezuela', 'KAIETEUR FALLS - Essequibo, Guyana' ];
+var titleNames = ['YOSEMITE FALLS - California, USA', 'LANGFOSSEN - Langfoss, Norway', 'SUTHERLAND FALLS - New Zealand ','VIRGINIA FALLS - Northern Territories, Canada', 'GULLFOSSEN - Gullfoss, Iceland', 'VICTORIA FALLS - Zimbabwe & Zambia', 'KEREPAKUPAI MERU - Venezuela', 'KAIETEUR FALLS - Essequibo, Guyana' ];
 
 var titleIndex = 0;
 //ON LOAD give image proper source
@@ -89,5 +85,3 @@ function detectUserLocation(){
 var lon,
 lat,
 total = 100;
-
-
